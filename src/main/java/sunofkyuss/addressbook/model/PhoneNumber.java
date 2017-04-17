@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
+import sunofkyuss.addressbook.model.Person;
 
 @Entity
 public class PhoneNumber implements Serializable {
@@ -23,8 +24,7 @@ public class PhoneNumber implements Serializable {
 
 	@Column
 	private String number;
-	
-	@Column
+
 	@ManyToOne
 	private Person owner;
 
@@ -76,6 +76,14 @@ public class PhoneNumber implements Serializable {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	
+	public Person getOwner() {
+		return this.owner;
+	}
+
+	public void setOwner(final Person owner) {
+		this.owner = owner;
+	}
 
 	@Override
 	public String toString() {
@@ -84,4 +92,5 @@ public class PhoneNumber implements Serializable {
 			result += "number: " + number;
 		return result;
 	}
+
 }
