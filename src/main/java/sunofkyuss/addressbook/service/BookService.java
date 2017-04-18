@@ -27,6 +27,7 @@ public class BookService {
 	private AddressDao ad;
 
 	public void newRecord(String name, String surname, String address, String email, List<String> numbers) {
+
 		Person p = new Person();
 		p.setName(name);
 		p.setSurname(surname);
@@ -34,8 +35,10 @@ public class BookService {
 		ad.create(adr);
 		p.setAddress(adr);
 		p.setEMail(email);
-		Set<PhoneNumber> pnumbers = numbers.stream().map(a -> new PhoneNumber(a)).collect(Collectors.toSet());
-		pnumbers.forEach(pn -> pnd.create(pn));
+		Set<PhoneNumber> pnumbers = numbers.stream()
+											.map(a -> new PhoneNumber(a))
+											.peek(a -> pnd.create(a))
+											.collect(Collectors.toSet());
 		p.setPhoneNumbers(pnumbers);
 		pd.create(p);
 	}
@@ -46,7 +49,9 @@ public class BookService {
 	}
 
 	public Person getPerson(long id) {
-		return pd.findById(id);
+		Person p = pd.findById(id);
+		p.getPhoneNumbers().size(); //for fetch
+		return p;
 	}
 
 }
