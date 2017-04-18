@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="context">
+		<h:head></h:head>
+		<h:body>
+			<b:column span="4" offset="4">
+				<b:well>
+
+					<h:form id="form">
+
+						<b:inputText value="#{inputView.name}" placeholder="name"
+							required="true" required-message="name is required" />
+						<b:inputText value="#{inputView.surname}" placeholder="surname"
+							required="true" required-message="surname is required" />
+						<b:inputTextarea value="#{inputView.address}"
+							placeholder="address" />
+						<b:inputText value="#{inputView.email}" placeholder="e-mail" />
+
+						<b:row id="telin" style-class="relative">
+							<b:column span="12">
+								<b:inputText placeholder="telephone"
+									value="#{inputView.number}" style-class="fill"/>
+							</b:column>
+							<b:navCommandLink action="#{inputView.addNumber}" tooltip="add number"
+								process=":form:telin" style-class="plus"
+								update=":form:numbers" ajax="true">
+								<b:iconAwesome name="plus" style-class="green" />
+							</b:navCommandLink>
+						</b:row>
+
+						<b:column id="numbers">
+							<ui:repeat var="num" value="#{inputView.numbers}">
+								<b:row style-class="relative">
+									<b:column span="6">
+										<h:outputText value="#{num}" />
+									</b:column>
+									<b:navCommandLink action="#{inputView.delete(num)}" style-class="minus"
+										immediate="true" update=":form:numbers">
+										<b:iconAwesome name="minus" style-class="red" />
+									</b:navCommandLink>
+								</b:row>
+							</ui:repeat>
+						</b:column>
+						<b:row>
+							<b:column span="12">
+								<b:commandButton value="Save the Record" style-class="fill"
+									ajax="true" update="@form gg" look="success"
+									action="#{createView.saveRecord}" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:well>
+			</b:column>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

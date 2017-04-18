@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+.fill {
+	width: 100%;
+}
+
+.relative {
+	position: relative;
+}
+
+.plus {
+	position: absolute;
+	top: 8px;
+	right: 25px;
+}
+
+.minus {
+	position: absolute;
+	top: 0px;
+	right: 5px;
+}
