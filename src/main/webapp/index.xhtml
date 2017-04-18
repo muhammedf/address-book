@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="context">
+		<h:head></h:head>
+		<h:body>
+			<b:column span="6" offset="3">
+				<b:well>
+					<b:dataTable value="#{listView.persons}" var="per">
+
+						<b:dataTableColumn label="Person">
+							<h:outputText value="#{per.name} #{per.surname}" />
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Address">
+							<h:outputText value="#{per.address.address}" />
+						</b:dataTableColumn>
+
+					</b:dataTable>
+				</b:well>
+			</b:column>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

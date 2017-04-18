@@ -3,6 +3,9 @@
 	version="3.1"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 	<display-name>AddressBook</display-name>
+	<welcome-file-list>
+		<welcome-file>/index.xhtml</welcome-file>
+	</welcome-file-list>
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
