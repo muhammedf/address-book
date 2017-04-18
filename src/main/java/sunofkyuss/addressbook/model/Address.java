@@ -28,6 +28,13 @@ public class Address implements Serializable {
 	@OneToOne
 	private Person owner;
 
+	public Address() {
+	}
+
+	public Address(String address) {
+		this.address = address;
+	}
+
 	public Long getId() {
 		return this.id;
 	}

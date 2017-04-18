@@ -28,6 +28,13 @@ public class PhoneNumber implements Serializable {
 	@ManyToOne
 	private Person owner;
 
+	public PhoneNumber() {
+	}
+
+	public PhoneNumber(String number) {
+		this.number = number;
+	}
+
 	public Long getId() {
 		return this.id;
 	}
@@ -76,7 +83,7 @@ public class PhoneNumber implements Serializable {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
+
 	public Person getOwner() {
 		return this.owner;
 	}
