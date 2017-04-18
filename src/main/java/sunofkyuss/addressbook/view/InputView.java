@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import sunofkyuss.addressbook.view.utility.Message;
+
 @Named
 @ViewScoped
 public class InputView implements Serializable {
@@ -26,6 +28,10 @@ public class InputView implements Serializable {
 	}
 
 	public void addNumber() {
+		if(number.isEmpty()){
+			Message.failure("Number is empty.");
+			return;
+		}
 		numbers.add(number);
 		number = null;
 	}

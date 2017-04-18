@@ -16,21 +16,39 @@
 					<h:form id="form">
 
 						<b:inputText value="#{inputView.name}" placeholder="name"
-							required="true" required-message="name is required" />
+							validator-message="there are unneccesseray spaces in name"
+							required="true" required-message="name is required">
+							<p:keyFilter regEx="/[a-z_ığüşöçİ ]/i" />
+							<f:validateRegex
+								pattern="^[a-zA-Z_ığüşöçİĞÜŞÖÇ]+( [a-zA-Z_ığüşöçİĞÜŞÖÇ]+)*$" />
+						</b:inputText>
+						
 						<b:inputText value="#{inputView.surname}" placeholder="surname"
-							required="true" required-message="surname is required" />
-						<b:inputTextarea value="#{inputView.address}"
+							validator-message="there are unneccessary spaces in surname"
+							required="true" required-message="surname is required">
+							<p:keyFilter regEx="/[a-z_ığüşöçİ ]/i" />
+							<f:validateRegex
+								pattern="^[a-zA-Z_ığüşöçİĞÜŞÖÇ]+( [a-zA-Z_ığüşöçİĞÜŞÖÇ]+)*$" />
+						</b:inputText>
+						
+						<b:inputTextarea value="#{inputView.address}" maxlength="255"
 							placeholder="address" />
-						<b:inputText value="#{inputView.email}" placeholder="e-mail" />
+							
+						<b:inputText value="#{inputView.email}" placeholder="e-mail"
+							validator-message="not a valid e-mail address">
+							<f:validateRegex
+								pattern="(([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+))?" />
+						</b:inputText>
 
 						<b:row id="telin" style-class="relative">
 							<b:column span="12">
-								<b:inputText placeholder="telephone"
-									value="#{inputView.number}" style-class="fill"/>
+								<p:inputMask mask="(99) 999-999-9999" placeholder="number"
+									value="#{inputView.number}"
+									styleClass="form-control bf-no-message has-success form-group fill" />
 							</b:column>
-							<b:navCommandLink action="#{inputView.addNumber}" tooltip="add number"
-								process=":form:telin" style-class="plus"
-								update=":form:numbers" ajax="true">
+							<b:navCommandLink action="#{inputView.addNumber}"
+								tooltip="add number" process=":form:telin" style-class="plus"
+								update=":form:numbers :form:telin gg" ajax="true">
 								<b:iconAwesome name="plus" style-class="green" />
 							</b:navCommandLink>
 						</b:row>
@@ -41,8 +59,8 @@
 									<b:column span="6">
 										<h:outputText value="#{num}" />
 									</b:column>
-									<b:navCommandLink action="#{inputView.delete(num)}" style-class="minus"
-										immediate="true" update=":form:numbers">
+									<b:navCommandLink action="#{inputView.delete(num)}"
+										style-class="minus" immediate="true" update=":form:numbers">
 										<b:iconAwesome name="minus" style-class="red" />
 									</b:navCommandLink>
 								</b:row>
