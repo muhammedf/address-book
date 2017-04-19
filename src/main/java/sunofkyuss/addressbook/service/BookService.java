@@ -29,17 +29,22 @@ public class BookService {
 	public void newRecord(String name, String surname, String address, String email, List<String> numbers) {
 
 		Person p = new Person();
+
 		p.setName(name);
 		p.setSurname(surname);
-		Address adr = new Address(address);
-		ad.create(adr);
-		p.setAddress(adr);
-		p.setEMail(email);
-		Set<PhoneNumber> pnumbers = numbers.stream()
-											.map(a -> new PhoneNumber(a))
-											.peek(a -> pnd.create(a))
-											.collect(Collectors.toSet());
+
+		if (!address.isEmpty()) {
+			Address adr = new Address(address);
+			ad.create(adr);
+			p.setAddress(adr);
+		}
+
+		p.setEMail(email.isEmpty() ? null : email);
+
+		Set<PhoneNumber> pnumbers = numbers.stream().map(a -> new PhoneNumber(a)).peek(a -> pnd.create(a))
+				.collect(Collectors.toSet());
 		p.setPhoneNumbers(pnumbers);
+
 		pd.create(p);
 	}
 
@@ -50,7 +55,9 @@ public class BookService {
 
 	public Person getPerson(long id) {
 		Person p = pd.findById(id);
-		p.getPhoneNumbers().size(); //for fetch
+		if (p != null) {
+			p.getPhoneNumbers().size(); // for fetch
+		}
 		return p;
 	}
 

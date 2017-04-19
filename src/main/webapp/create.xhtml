@@ -4,11 +4,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 <ui:composition template="/WEB-INF/template/template.xhtml">
 	<ui:define name="context">
-		<h:head></h:head>
+		<h:head>
+			<o:importConstants
+				type="sunofkyuss.addressbook.view.utility.Constants" />
+		</h:head>
 		<h:body>
 			<b:column span="4" offset="4">
 				<b:well>
@@ -16,56 +19,56 @@
 					<h:form id="form">
 
 						<b:inputText value="#{inputView.name}" placeholder="name"
-							validator-message="there are unneccesseray spaces in name"
+							validator-message="there are unnecessary spaces in name"
 							required="true" required-message="name is required">
-							<p:keyFilter regEx="/[a-z_ığüşöçİ ]/i" />
-							<f:validateRegex
-								pattern="^[a-zA-Z_ığüşöçİĞÜŞÖÇ]+( [a-zA-Z_ığüşöçİĞÜŞÖÇ]+)*$" />
+							<p:keyFilter regEx="#{Constants.AlphaKeyFilter}" />
+							<f:validateRegex pattern="#{Constants.SpacedAlphaRegexPattern}" />
 						</b:inputText>
-						
+
 						<b:inputText value="#{inputView.surname}" placeholder="surname"
-							validator-message="there are unneccessary spaces in surname"
+							validator-message="there are unnecessary spaces in surname"
 							required="true" required-message="surname is required">
-							<p:keyFilter regEx="/[a-z_ığüşöçİ ]/i" />
-							<f:validateRegex
-								pattern="^[a-zA-Z_ığüşöçİĞÜŞÖÇ]+( [a-zA-Z_ığüşöçİĞÜŞÖÇ]+)*$" />
+							<p:keyFilter regEx="#{Constants.AlphaKeyFilter}" />
+							<f:validateRegex pattern="#{Constants.SpacedAlphaRegexPattern}" />
 						</b:inputText>
-						
+
 						<b:inputTextarea value="#{inputView.address}" maxlength="255"
-							placeholder="address" />
-							
+							validator-message="there are unnecessary spaces in address"
+							placeholder="address">
+							<p:keyFilter regEx="#{Constants.AlphaNumericPuncKeyFilter}" />
+							<f:validateRegex
+								pattern="#{Constants.NullableSpacedAlphaNumericPuncRegexPattern}" />
+						</b:inputTextarea>
+
 						<b:inputText value="#{inputView.email}" placeholder="e-mail"
 							validator-message="not a valid e-mail address">
-							<f:validateRegex
-								pattern="(([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+))?" />
+							<f:validateRegex pattern="#{Constants.NullableEMailRegexPattern}" />
 						</b:inputText>
 
-						<b:row id="telin" style-class="relative">
-							<b:column span="12">
-								<p:inputMask mask="(99) 999-999-9999" placeholder="number"
-									value="#{inputView.number}"
-									styleClass="form-control bf-no-message has-success form-group fill" />
-							</b:column>
-							<b:navCommandLink action="#{inputView.addNumber}"
-								tooltip="add number" process=":form:telin" style-class="plus"
-								update=":form:numbers :form:telin gg" ajax="true">
-								<b:iconAwesome name="plus" style-class="green" />
-							</b:navCommandLink>
-						</b:row>
+						<h:panelGroup id="telin">
+							<div class="relative">
+								<p:inputMask mask="#{Constants.PhoneNumberMask}"
+									placeholder="number" value="#{inputView.number}"
+									styleClass="#{Constants.InputMaskBootify} fill" />
+								<b:navCommandLink action="#{inputView.addNumber}"
+									tooltip="add number" process=":form:telin" style-class="plus"
+									update=":form:numbers :form:telin gg" ajax="true">
+									<b:iconAwesome name="plus" style-class="green" />
+								</b:navCommandLink>
+							</div>
+						</h:panelGroup>
 
-						<b:column id="numbers">
+						<h:panelGroup id="numbers">
 							<ui:repeat var="num" value="#{inputView.numbers}">
-								<b:row style-class="relative">
-									<b:column span="6">
-										<h:outputText value="#{num}" />
-									</b:column>
+								<div class="relative">
+									<h:outputText value="#{num}" />
 									<b:navCommandLink action="#{inputView.delete(num)}"
 										style-class="minus" immediate="true" update=":form:numbers">
 										<b:iconAwesome name="minus" style-class="red" />
 									</b:navCommandLink>
-								</b:row>
+								</div>
 							</ui:repeat>
-						</b:column>
+						</h:panelGroup>
 						<b:row>
 							<b:column span="12">
 								<b:commandButton value="Save the Record" style-class="fill"
@@ -73,7 +76,9 @@
 									action="#{createView.saveRecord}" />
 							</b:column>
 						</b:row>
+
 					</h:form>
+
 				</b:well>
 			</b:column>
 		</h:body>
