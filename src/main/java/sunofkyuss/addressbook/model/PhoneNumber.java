@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import sunofkyuss.addressbook.model.Person;
@@ -25,7 +26,7 @@ public class PhoneNumber implements Serializable {
 	@Column
 	private String number;
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Person owner;
 
 	public PhoneNumber() {

@@ -38,7 +38,7 @@ public class Person implements Serializable {
 	@Column(nullable = false)
 	private String surname;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<PhoneNumber> phoneNumbers = new HashSet<PhoneNumber>();
 
 	@OneToOne(cascade = CascadeType.ALL)

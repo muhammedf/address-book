@@ -41,9 +41,8 @@ public class BookService {
 
 		p.setEMail(email.isEmpty() ? null : email);
 
-		Set<PhoneNumber> pnumbers = numbers.stream().map(a -> new PhoneNumber(a)).peek(a -> pnd.create(a))
-				.collect(Collectors.toSet());
-		p.setPhoneNumbers(pnumbers);
+		numbers.stream().map(a -> new PhoneNumber(a)).peek(a -> a.setOwner(p))
+				.peek(a -> pnd.create(a)).collect(Collectors.toSet());
 
 		pd.create(p);
 	}

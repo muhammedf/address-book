@@ -69,13 +69,10 @@
 								</div>
 							</ui:repeat>
 						</h:panelGroup>
-						<b:row>
-							<b:column span="12">
-								<b:commandButton value="Save the Record" style-class="fill"
-									ajax="true" update="@form gg" look="success"
-									action="#{createView.saveRecord}" />
-							</b:column>
-						</b:row>
+						
+						<b:commandButton value="Save the Record" style-class="fill"
+							ajax="true" update="@form gg" look="success"
+							action="#{createView.saveRecord}" />
 
 					</h:form>
 
