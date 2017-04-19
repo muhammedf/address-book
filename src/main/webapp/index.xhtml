@@ -15,7 +15,10 @@
 					<b:dataTable value="#{listView.persons}" var="per">
 
 						<b:dataTableColumn label="Person">
-							<h:outputText value="#{per.name} #{per.surname}" />
+							<b:navLink value="#{per.name} #{per.surname}"
+								outcome="/record.xhtml">
+								<f:param name="pid" value="#{per.id}" />
+							</b:navLink>
 						</b:dataTableColumn>
 
 						<b:dataTableColumn label="Address">

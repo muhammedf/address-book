@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="context">
+		<h:head>
+			<o:importConstants
+				type="sunofkyuss.addressbook.view.utility.Constants" />
+		</h:head>
+		<h:body>
+			<b:column offset="3" span="6">
+				<b:well>
+					<h:form id="form">
+
+						<h:panelGrid columns="2" styleClass="fixed-table">
+
+							<h:column>
+								<h:outputText value="Name:" />
+							</h:column>
+							<h:column>
+								<p:inplace>
+									<f:facet name="output">
+										<b:navLink value="#{editView.p.name}" tooltip="click to edit" />
+									</f:facet>
+									<div class="editor">
+										<b:inputText id="name" value="#{inputView.name}"
+											required="true" required-message="name is required"
+											validator-message="there are unnecessary spaces in name">
+											<p:keyFilter regEx="#{Constants.AlphaKeyFilter}" />
+											<f:validateRegex
+												pattern="#{Constants.SpacedAlphaRegexPattern}" />
+										</b:inputText>
+										<b:navCommandLink style-class="left-icon" update="@parent gg"
+											action="#{editView.editName()}" process="name">
+											<b:iconAwesome name="check" style-class="green" />
+										</b:navCommandLink>
+										<b:navCommandLink style-class="right-icon" update="@parent gg"
+											process="@this">
+											<b:iconAwesome name="times" style-class="red" />
+										</b:navCommandLink>
+									</div>
+								</p:inplace>
+							</h:column>
+
+							<h:column>
+								<h:outputText value="Surname:" />
+							</h:column>
+							<h:column>
+								<p:inplace>
+									<f:facet name="output">
+										<b:navLink value="#{editView.p.surname}"
+											tooltip="click to edit" />
+									</f:facet>
+									<div class="editor">
+										<b:inputText id="surname" value="#{inputView.surname}"
+											required="true" required-message="surname is required"
+											validator-message="there are unnecessary spaces in surname">
+											<p:keyFilter regEx="#{Constants.AlphaKeyFilter}" />
+											<f:validateRegex
+												pattern="#{Constants.SpacedAlphaRegexPattern}" />
+										</b:inputText>
+										<b:navCommandLink style-class="left-icon" update="@parent gg"
+											action="#{editView.editSurname()}" process="surname">
+											<b:iconAwesome name="check" style-class="green" />
+										</b:navCommandLink>
+										<b:navCommandLink style-class="right-icon" update="@parent gg"
+											process="@this">
+											<b:iconAwesome name="times" style-class="red" />
+										</b:navCommandLink>
+									</div>
+								</p:inplace>
+							</h:column>
+
+							<h:column>
+								<h:outputText value="Address:" />
+							</h:column>
+							<h:column>
+								<p:inplace>
+									<f:facet name="output">
+										<ui:fragment rendered="#{not empty editView.p.address}">
+											<b:navLink value="#{editView.p.address.address}"
+												tooltip="click to edit" />
+										</ui:fragment>
+										<ui:fragment rendered="#{empty editView.p.address.address}">
+											<b:navLink value="no address" tooltip="click to add" />
+										</ui:fragment>
+									</f:facet>
+									<div class="editor">
+										<b:inputTextarea id="address" value="#{inputView.address}"
+											required="true" required-message="address is required"
+											validator-message="there are unnecessary spaces in address">
+											<p:keyFilter regEx="#{Constants.AlphaNumericPuncKeyFilter}" />
+											<f:validateRegex
+												pattern="#{Constants.SpacedAlphaNumericPuncRegexPattern}" />
+										</b:inputTextarea>
+										<b:navCommandLink update="@parent gg" style-class="left-icon"
+											action="#{editView.editAddress()}" process="address">
+											<b:iconAwesome name="check" style-class="green" />
+										</b:navCommandLink>
+										<b:navCommandLink update="@parent gg" style-class="right-icon"
+											process="@this">
+											<b:iconAwesome name="times" style-class="red" />
+										</b:navCommandLink>
+									</div>
+								</p:inplace>
+							</h:column>
+
+							<h:column>
+								<h:outputText value="E-mail:" />
+							</h:column>
+							<h:column>
+								<p:inplace>
+									<f:facet name="output">
+										<ui:fragment rendered="#{not empty editView.p.EMail}">
+											<b:navLink value="#{editView.p.EMail}"
+												tooltip="click to edit" />
+										</ui:fragment>
+										<ui:fragment rendered="#{empty editView.p.EMail}">
+											<b:navLink value="no email" tooltip="click to add" />
+										</ui:fragment>
+									</f:facet>
+									<div class="editor">
+										<b:inputText id="email" value="#{inputView.email}"
+											required="true" required-message="email is required"
+											validator-message="not a valid email address">
+											<f:validateRegex pattern="#{Constants.EMailRegexPattern}" />
+										</b:inputText>
+										<b:navCommandLink style-class="left-icon" update="@parent gg"
+											action="#{editView.editEMail()}" process="email">
+											<b:iconAwesome name="check" style-class="green" />
+										</b:navCommandLink>
+										<b:navCommandLink style-class="right-icon" update="@parent gg"
+											process="@this">
+											<b:iconAwesome name="times" style-class="red" />
+										</b:navCommandLink>
+									</div>
+								</p:inplace>
+							</h:column>
+
+							<h:column>
+								<h:outputText value="Phone Numbers:" />
+							</h:column>
+							<h:column>
+
+								<p:inplace>
+									<f:facet name="output">
+										<b:navLink value="add phone number" />
+										<br />
+									</f:facet>
+									<div class="editor">
+										<div class="relative">
+											<p:inputMask id="number" value="#{inputView.number}"
+												mask="(99) 999-999-9999"
+												styleClass="#{Constants.InputMaskBootify} fill"
+												required="true" requiredMessage="number is empty" />
+											<b:navCommandLink action="#{editView.addNumber()}"
+												style-class="plus" process="number"
+												update="@parent numbers gg">
+												<b:iconAwesome name="plus" style-class="green" />
+											</b:navCommandLink>
+										</div>
+									</div>
+								</p:inplace>
+
+								<h:panelGroup id="numbers">
+									<ui:repeat var="num"
+										value="#{editView.p.phoneNumbers.toArray()}">
+										<div class="relative">
+											<h:outputText value="#{num.number}" />
+											<b:navCommandLink action="#{editView.removeNumber(num)}"
+												style-class="minus" immediate="true"
+												update=":form:numbers gg">
+												<b:iconAwesome name="minus" style-class="red" />
+											</b:navCommandLink>
+											<br />
+										</div>
+									</ui:repeat>
+								</h:panelGroup>
+							</h:column>
+
+						</h:panelGrid>
+
+					</h:form>
+				</b:well>
+			</b:column>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>
