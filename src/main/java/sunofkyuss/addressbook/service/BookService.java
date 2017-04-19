@@ -41,8 +41,8 @@ public class BookService {
 
 		p.setEMail(email.isEmpty() ? null : email);
 
-		numbers.stream().map(a -> new PhoneNumber(a)).peek(a -> a.setOwner(p))
-				.peek(a -> pnd.create(a)).collect(Collectors.toSet());
+		numbers.stream().map(a -> new PhoneNumber(a)).peek(a -> a.setOwner(p)).peek(a -> pnd.create(a))
+				.collect(Collectors.toSet());
 
 		pd.create(p);
 	}
@@ -58,6 +58,15 @@ public class BookService {
 			p.getPhoneNumbers().size(); // for fetch
 		}
 		return p;
+	}
+
+	public boolean removePerson(long id) {
+		try {
+			pd.deleteById(id);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

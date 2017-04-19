@@ -12,20 +12,29 @@
 		<h:body>
 			<b:column span="6" offset="3">
 				<b:well>
-					<b:dataTable value="#{listView.persons}" var="per">
+					<h:form>
+						<b:dataTable id="table" value="#{listView.persons}" var="per">
 
-						<b:dataTableColumn label="Person">
-							<b:navLink value="#{per.name} #{per.surname}"
-								outcome="/record.xhtml">
-								<f:param name="pid" value="#{per.id}" />
-							</b:navLink>
-						</b:dataTableColumn>
+							<b:dataTableColumn label="Person">
+								<b:navLink value="#{per.name} #{per.surname}"
+									outcome="/record.xhtml">
+									<f:param name="pid" value="#{per.id}" />
+								</b:navLink>
+							</b:dataTableColumn>
 
-						<b:dataTableColumn label="Address">
-							<h:outputText value="#{per.address.address}" />
-						</b:dataTableColumn>
+							<b:dataTableColumn label="Address">
+								<h:outputText value="#{per.address.address}" />
+							</b:dataTableColumn>
 
-					</b:dataTable>
+							<b:dataTableColumn label="#">
+								<b:navCommandLink action="#{listView.removePerson(per)}"
+									update="@form gg" tooltip="remove record">
+									<b:iconAwesome name="times-rectangle" style-class="red" />
+								</b:navCommandLink>
+							</b:dataTableColumn>
+
+						</b:dataTable>
+					</h:form>
 				</b:well>
 			</b:column>
 		</h:body>
