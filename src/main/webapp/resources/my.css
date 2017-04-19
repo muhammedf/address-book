@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 
 .red {
-	color: red;
+	color: #c9302c;
 }
 
 .green {
-	color: green;
+	color: #449d44;
 }
 
 .fill {
@@ -19,13 +19,13 @@
 .plus {
 	position: absolute;
 	top: 8px;
-	right: 15px;
+	right: 10px;
 }
 
 .minus {
 	position: absolute;
 	top: 0px;
-	right: 15px;
+	right: 10px;
 }
 
 .editor {
@@ -60,4 +60,8 @@
 .fixed-table td:NTH-CHILD(2)
 {
     padding-left: 20px;
+}
+
+.bottom-pad {
+	padding-bottom: 15px;
 }

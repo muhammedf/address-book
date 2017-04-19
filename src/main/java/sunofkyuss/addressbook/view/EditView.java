@@ -43,8 +43,12 @@ public class EditView implements Serializable {
 		if (spid != null) {
 			pid = Long.valueOf(spid);
 			p = bs.getPerson(pid);
-		} else
-			throw new NullPointerException();
+			if (p == null) {
+				throw new NullPointerException("Person is null.");
+			}
+		} else {
+			throw new IllegalArgumentException("Can't find id.");
+		}
 
 		iv.setName(p.getName());
 		iv.setSurname(p.getSurname());

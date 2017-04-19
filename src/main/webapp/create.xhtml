@@ -59,17 +59,19 @@
 						</h:panelGroup>
 
 						<h:panelGroup id="numbers">
-							<ui:repeat var="num" value="#{inputView.numbers}">
-								<div class="relative">
-									<h:outputText value="#{num}" />
-									<b:navCommandLink action="#{inputView.delete(num)}"
-										style-class="minus" immediate="true" update=":form:numbers">
-										<b:iconAwesome name="minus" style-class="red" />
-									</b:navCommandLink>
-								</div>
-							</ui:repeat>
+							<div class="bottom-pad">
+								<ui:repeat var="num" value="#{inputView.numbers}">
+									<div class="relative">
+										<h:outputText value="#{num}" />
+										<b:navCommandLink action="#{inputView.delete(num)}"
+											style-class="minus" immediate="true" update=":form:numbers">
+											<b:iconAwesome name="minus" style-class="red" />
+										</b:navCommandLink>
+									</div>
+								</ui:repeat>
+							</div>
 						</h:panelGroup>
-						
+
 						<b:commandButton value="Save the Record" style-class="fill"
 							ajax="true" update="@form gg" look="success"
 							action="#{createView.saveRecord}" />

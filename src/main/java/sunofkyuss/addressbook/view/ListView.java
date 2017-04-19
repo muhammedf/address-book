@@ -29,6 +29,10 @@ public class ListView implements Serializable {
 	@PostConstruct
 	public void init() {
 		persons = bs.listAllPersons();
+		
+		if(persons==null){
+			throw new NullPointerException("Persons list is null.");
+		}
 	}
 
 	public void removePerson(Person p) {

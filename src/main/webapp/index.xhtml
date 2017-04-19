@@ -22,11 +22,11 @@
 								</b:navLink>
 							</b:dataTableColumn>
 
-							<b:dataTableColumn label="Address">
+							<b:dataTableColumn label="Address" orderable="false">
 								<h:outputText value="#{per.address.address}" />
 							</b:dataTableColumn>
 
-							<b:dataTableColumn label="#">
+							<b:dataTableColumn label="#" orderable="false">
 								<b:navCommandLink action="#{listView.removePerson(per)}"
 									update="@form gg" tooltip="remove record">
 									<b:iconAwesome name="times-rectangle" style-class="red" />
