@@ -63,21 +63,6 @@ public class BookService {
 		return p;
 	}
 
-	public Person getPerson(long id) {
-
-		Person p = null;
-
-		try {
-			p = pd.findById(id);
-			if (p != null) {
-				p.getPhoneNumbers().size(); // for fetch
-			}
-		} catch (Exception e) {
-		}
-
-		return p;
-	}
-
 	public boolean removePerson(long id) {
 		try {
 			pd.deleteById(id);

@@ -17,6 +17,21 @@ public class EditService {
 
 	@Inject
 	private PhoneNumberDao pnd;
+	
+	public Person getPerson(long id) {
+
+		Person p = null;
+
+		try {
+			p = pd.findById(id);
+			if (p != null) {
+				p.getPhoneNumbers().size(); // for fetch
+			}
+		} catch (Exception e) {
+		}
+
+		return p;
+	}
 
 	public boolean updateName(long pid, String name) {
 

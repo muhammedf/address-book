@@ -25,9 +25,6 @@ public class EditView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private BookService bs;
-
-	@Inject
 	private EditService es;
 
 	@Inject
@@ -42,7 +39,7 @@ public class EditView implements Serializable {
 
 		if (spid != null) {
 			pid = Long.valueOf(spid);
-			p = bs.getPerson(pid);
+			p = es.getPerson(pid);
 			if (p == null) {
 				throw new NullPointerException("Person is null.");
 			}
